@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klinik Psikologi</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 15px 0;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+            background: white;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        input, select {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Selamat Datang di Klinik Psikologi</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Beranda</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#contact">Kontak</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+        <img src="mental-health-illustration.png" alt="Mental Health Journal Logo" class="logo">
+    </header>
+    
+    <section id="login" class="login-form">
+        <h2>Login</h2>
+        <form action="dashboard.html" method="POST" onsubmit="return login()">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Masuk</button>
+        </form>
+        <p id="login-error" style="color: red; display: none;">Username atau password salah!</p>
+    </section>
+    
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === "admin" && password === "1234") {
+                window.location.href = "dashboard.html";
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+    </script>
+
+    <section id="home">
+        <h2>Kesehatan Mental Anda Prioritas Kami</h2>
+        <p>Dapatkan konsultasi dengan psikolog profesional.</p>
+        <button onclick="addEventToGoogleCalendar()">Jadwalkan Konsultasi</button>
+    </section>
+    
+    <section id="dashboard">
+        <h2>Dashboard Pasien</h2>
+        <p>Selamat datang di dashboard Anda. Di sini, Anda dapat melihat riwayat konsultasi dan mengatur jadwal baru.</p>
+        <button onclick="addEventToGoogleCalendar()">Buat Jadwal Baru</button>
+        <h3>Riwayat Konsultasi</h3>
+        <input type="text" id="search" placeholder="Cari berdasarkan catatan..." onkeyup="filterTable()">
+        <select id="filter" onchange="filterTable()">
+            <option value="">Semua Psikolog</option>
+            <option value="Dr. Adie Setiawan">Dr. Adie Setiawan</option>
+            <option value="Dr. Wahyan">Dr. Wahyan</option>
+        </select>
+        <table id="consultationTable">
+            <tr>
+                <th>Tanggal</th>
+                <th>Psikolog</th>
+                <th>Catatan</th>
+            </tr>
+            <tr>
+                <td>15 Maret 2025</td>
+                <td>Dr. Adie Setiawan</td>
+                <td>Diskusi tentang manajemen stres.</td>
+            </tr>
+            <tr>
+                <td>22 Maret 2025</td>
+                <td>Dr. Wahyan</td>
+                <td>Evaluasi perkembangan terapi.</td>
+            </tr>
+        </table>
+    </section>
+    
+    <section id="about">
+        <h2>Tentang Kami</h2>
+        <p>Kami adalah tim psikolog profesional yang siap membantu Anda.</p>
+    </section>
+    
+    <section id="services">
+        <h2>Layanan Kami</h2>
+        <ul>
+            <li>Konsultasi Individu</li>
+            <li>Konseling Keluarga</li>
+            <li>Terapi Kognitif</li>
+        </ul>
+    </section>
+    
+    <section id="contact">
+        <h2>Hubungi Kami</h2>
+        <p>Email: support@klinikpsikologi.com</p>
+        <p>Telepon: 0812-3456-7890</p>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Klinik Psikologi. Semua Hak Dilindungi.</p>
+    </footer>
+
+    <script>
+        function addEventToGoogleCalendar() {
+            const event = {
+                action: 'TEMPLATE',
+                text: 'Konsultasi Psikologi',
+                dates: '20250320T100000Z/20250320T110000Z',
+                details: 'Konsultasi dengan dokter psikologi.',
+                location: 'Klinik Psikologi',
+            };
+            const queryString = new URLSearchParams(event).toString();
+            window.open(`https://www.google.com/calendar/render?${queryString}`, '_blank');
+        }
+
+        function filterTable() {
+            const searchValue = document.getElementById('search').value.toLowerCase();
+            const filterValue = document.getElementById('filter').value;
+            const table = document.getElementById('consultationTable');
+            const rows = table.getElementsByTagName('tr');
+            
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                const psychologist = cells[1].textContent;
+                const notes = cells[2].textContent.toLowerCase();
+                
+                if ((notes.includes(searchValue) || searchValue === '') && (psychologist === filterValue || filterValue === '')) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
